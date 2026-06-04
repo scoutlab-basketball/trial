@@ -172,6 +172,45 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 }
 body{padding-top:52px}
 
+/* ── NEXT OPPONENTS SLIDER ── */
+.next-slider-wrap{
+  overflow:hidden;
+  position:relative;
+}
+.next-slider-wrap::after{
+  content:'';
+  position:absolute;top:0;right:0;bottom:0;
+  width:60px;
+  background:linear-gradient(to right,transparent,var(--bg));
+  pointer-events:none;
+  z-index:2;
+}
+.next-slider{
+  display:flex;gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:4px;
+}
+.next-slider::-webkit-scrollbar{display:none}
+.next-card{
+  background:var(--card);
+  border-radius:18px;
+  padding:22px 20px;
+  flex-shrink:0;
+  width:calc(100% - 40px);
+  scroll-snap-align:start;
+}
+.next-card-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.next-card-name{font-size:20px;font-weight:900;color:var(--t1);letter-spacing:-.5px;line-height:1.1}
+.next-card-meta{font-size:12px;color:var(--t3);margin-top:4px;font-weight:600}
+.next-card-stats{display:flex;gap:0;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:14px 0}
+.next-stat{flex:1;text-align:center}
+.next-stat:not(:last-child){border-right:1px solid var(--b1)}
+.next-stat-val{font-size:18px;font-weight:900;color:var(--t1);letter-spacing:-.3px}
+.next-stat-lbl{font-size:10px;color:var(--t3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+
 /* ── MOBILE ── */
 @media (max-width:767px){
   main{margin-left:0;padding:14px 12px;gap:14px}
@@ -302,35 +341,111 @@ body{padding-top:52px}
     </div>
   </div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-left">
-      <div style="display:flex;align-items:center;gap:16px">
-        <div class="opp-logo" style="width:56px;height:56px;border-radius:12px;flex-shrink:0">
-          <img src="logos/monaco.svg" alt="AS Monaco Basket" onerror="this.parentNode.innerHTML='<span>MCO</span>'">
+  <!-- PROCHAINS ADVERSAIRES -->
+  <div>
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:12px">Prochains adversaires</div>
+    <div class="next-slider-wrap">
+      <div class="next-slider" id="nextSlider">
+
+        <!-- Card 1 — AS Monaco -->
+        <div class="next-card">
+          <div class="next-card-head">
+            <div class="opp-logo" style="width:48px;height:48px;border-radius:10px;flex-shrink:0">
+              <img src="logos/monaco.svg" alt="Monaco" onerror="this.parentNode.innerHTML='<span>MCO</span>'">
+            </div>
+            <div>
+              <div class="next-card-name">AS Monaco Basket</div>
+              <div class="next-card-meta">Betclic Élite · 14 juin</div>
+            </div>
+          </div>
+          <div class="next-card-stats">
+            <div class="next-stat"><div class="next-stat-val">88.4</div><div class="next-stat-lbl">Pts / match</div></div>
+            <div class="next-stat"><div class="next-stat-val">49%</div><div class="next-stat-lbl">FG%</div></div>
+            <div class="next-stat"><div class="next-stat-val">37%</div><div class="next-stat-lbl">3pts%</div></div>
+            <div class="next-stat"><div class="next-stat-val">13.2</div><div class="next-stat-lbl">Pertes</div></div>
+          </div>
+          <div class="swot" style="margin-top:16px">
+            <div class="swot-col">
+              <div class="swot-title swot-title-g">Points forts</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Transition offensive</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Adresse à 3pts (37%)</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Défense périmétrique</div>
+            </div>
+            <div class="swot-col">
+              <div class="swot-title swot-title-r">Points faibles</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Pertes de balle (13.2)</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rebond offensif</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rythme en 2e mi-temps</div>
+            </div>
+          </div>
         </div>
-        <div class="hero-name">AS Monaco Basket</div>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-val">88.4</div><div class="hero-stat-lbl">Pts / match</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">42.1</div><div class="hero-stat-lbl">Rbds / match</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">21.8</div><div class="hero-stat-lbl">Passes</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">49%</div><div class="hero-stat-lbl">FG%</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">37%</div><div class="hero-stat-lbl">3pts%</div></div>
-      </div>
-    </div>
-    <div class="swot">
-      <div class="swot-col">
-        <div class="swot-title swot-title-g">Points forts</div>
-        <div class="swot-item swot-item-g"><span class="swot-dot"></span>Transition offensive</div>
-        <div class="swot-item swot-item-g"><span class="swot-dot"></span>Adresse à 3pts (37%)</div>
-        <div class="swot-item swot-item-g"><span class="swot-dot"></span>Défense périmétrique</div>
-      </div>
-      <div class="swot-col">
-        <div class="swot-title swot-title-r">Points faibles</div>
-        <div class="swot-item swot-item-r"><span class="swot-dot"></span>Pertes de balle (13.2)</div>
-        <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rebond offensif</div>
-        <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rythme en 2e mi-temps</div>
+
+        <!-- Card 2 — Paris Basketball -->
+        <div class="next-card">
+          <div class="next-card-head">
+            <div class="opp-logo" style="width:48px;height:48px;border-radius:10px;flex-shrink:0">
+              <img src="logos/paris.svg" alt="Paris" onerror="this.parentNode.innerHTML='<span>PAR</span>'">
+            </div>
+            <div>
+              <div class="next-card-name">Paris Basketball</div>
+              <div class="next-card-meta">Betclic Élite · 21 juin</div>
+            </div>
+          </div>
+          <div class="next-card-stats">
+            <div class="next-stat"><div class="next-stat-val">91.2</div><div class="next-stat-lbl">Pts / match</div></div>
+            <div class="next-stat"><div class="next-stat-val">47%</div><div class="next-stat-lbl">FG%</div></div>
+            <div class="next-stat"><div class="next-stat-val">39%</div><div class="next-stat-lbl">3pts%</div></div>
+            <div class="next-stat"><div class="next-stat-val">11.8</div><div class="next-stat-lbl">Pertes</div></div>
+          </div>
+          <div class="swot" style="margin-top:16px">
+            <div class="swot-col">
+              <div class="swot-title swot-title-g">Points forts</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Adresse extérieure</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Press défensif</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Profondeur de banc</div>
+            </div>
+            <div class="swot-col">
+              <div class="swot-title swot-title-r">Points faibles</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rebond défensif</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>2e mi-temps lents</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Fautes fréquentes</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 — LDLC ASVEL -->
+        <div class="next-card">
+          <div class="next-card-head">
+            <div class="opp-logo" style="width:48px;height:48px;border-radius:10px;flex-shrink:0">
+              <img src="logos/asvel.svg" alt="ASVEL" onerror="this.parentNode.innerHTML='<span>ASV</span>'">
+            </div>
+            <div>
+              <div class="next-card-name">LDLC ASVEL</div>
+              <div class="next-card-meta">EuroLeague · 28 juin</div>
+            </div>
+          </div>
+          <div class="next-card-stats">
+            <div class="next-stat"><div class="next-stat-val">84.7</div><div class="next-stat-lbl">Pts / match</div></div>
+            <div class="next-stat"><div class="next-stat-val">45%</div><div class="next-stat-lbl">FG%</div></div>
+            <div class="next-stat"><div class="next-stat-val">34%</div><div class="next-stat-lbl">3pts%</div></div>
+            <div class="next-stat"><div class="next-stat-val">14.5</div><div class="next-stat-lbl">Pertes</div></div>
+          </div>
+          <div class="swot" style="margin-top:16px">
+            <div class="swot-col">
+              <div class="swot-title swot-title-g">Points forts</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Jeu intérieur</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Rebond offensif</div>
+              <div class="swot-item swot-item-g"><span class="swot-dot"></span>Défense en zone</div>
+            </div>
+            <div class="swot-col">
+              <div class="swot-title swot-title-r">Points faibles</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Lenteur en transition</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Adresse 3pts (34%)</div>
+              <div class="swot-item swot-item-r"><span class="swot-dot"></span>Gestion du tempo</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
