@@ -9,12 +9,12 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 :root{
-  --bg:#0A0A0A;--s:#111111;--card:#1E1E1E;--up:#2A2A2A;
-  --b1:rgba(255,255,255,0.09);--b2:rgba(255,255,255,0.16);
+  --bg:#ffffff;--s:#f4f4f5;--card:#f7f7f8;--up:#ebebec;
+  --b1:rgba(0,0,0,0.07);--b2:rgba(0,0,0,0.12);
   --o:#ef3041;--o2:#ef3041;
   --og:linear-gradient(135deg,#ef3041,#ff4d5e);
   --od:rgba(239,48,65,.16);
-  --t1:#FFFFFF;--t2:#AAAAAA;--t3:#777777;
+  --t1:#0f0f10;--t2:#555558;--t3:#9a9a9e;
   --g:#3DC97A;--r:#F04F5C;--a:#ef3041;
 }
 
@@ -24,7 +24,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* ── SIDEBAR ── */
 nav{width:72px;min-height:100vh;background:var(--s);display:flex;flex-direction:column;align-items:center;padding:18px 0;position:fixed;top:0;left:0;bottom:0;z-index:99}
 .nav-logo{width:38px;height:38px;background:var(--og);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#000;box-shadow:0 4px 18px rgba(239,48,65,.45);margin-bottom:28px;flex-shrink:0}
-.nav-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--t3);cursor:pointer;transition:all .15s;margin-bottom:4px;position:relative}
+.nav-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--t2);cursor:pointer;transition:all .15s;margin-bottom:4px;position:relative}
 .nav-ico svg{width:20px;height:20px}
 .nav-ico:hover{background:var(--up);color:var(--t2)}
 .nav-ico.on{background:var(--od);color:var(--o)}
@@ -36,9 +36,9 @@ nav{width:72px;min-height:100vh;background:var(--s);display:flex;flex-direction:
 main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:column;gap:22px;min-width:0}
 
 /* ── HERO ── */
-.hero{background:linear-gradient(135deg,#0E0E0E 0%,#161616 100%);border-radius:20px;padding:28px 32px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,#f0f0f2 0%,#f7f7f8 100%);border-radius:20px;padding:28px 32px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;position:relative;overflow:hidden}
 .hero-left{display:flex;flex-direction:column;gap:20px}
-.hero::before{content:'';position:absolute;top:-60px;right:180px;width:260px;height:260px;background:radial-gradient(circle,rgba(239,48,65,.07) 0%,transparent 65%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:-60px;right:180px;width:260px;height:260px;background:radial-gradient(circle,rgba(239,48,65,.05) 0%,transparent 65%);pointer-events:none}
 .hero-name{font-size:42px;font-weight:900;color:var(--t1);letter-spacing:-2px;line-height:1}
 .swot{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center}
 .swot-col{display:flex;flex-direction:column;gap:5px}
@@ -48,7 +48,7 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 .swot-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .swot-item-g .swot-dot{background:var(--g)}.swot-item-r .swot-dot{background:var(--r)}
 .hero-stats{display:flex;gap:8px}
-.hero-stat{text-align:center;background:rgba(255,255,255,.05);border-radius:12px;padding:14px 0;width:100px;flex-shrink:0}
+.hero-stat{text-align:center;background:rgba(0,0,0,0.05);border-radius:12px;padding:14px 0;width:100px;flex-shrink:0}
 .hero-stat-val{font-size:24px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1}
 .hero-stat-lbl{font-size:11px;color:#fff;opacity:.55;margin-top:8px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;padding:0 6px}
 
@@ -66,7 +66,7 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 .form-strip{display:flex;gap:8px;align-items:center;margin-bottom:18px}
 .form-badge{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
 .fb-v{background:rgba(61,201,122,.14);color:var(--g)}.fb-d{background:rgba(240,79,92,.14);color:var(--r)}
-.form-game{flex:1;padding:10px 14px;background:rgba(255,255,255,.025);border-radius:10px;display:flex;align-items:center;justify-content:space-between}
+.form-game{flex:1;padding:10px 14px;background:rgba(0,0,0,0.04);border-radius:10px;display:flex;align-items:center;justify-content:space-between}
 .form-opp{font-size:12.5px;font-weight:600;color:var(--t1)}
 .form-score{font-size:12.5px;font-weight:700;color:var(--t2);font-variant-numeric:tabular-nums}
 .form-date{font-size:11px;color:var(--t3);margin-left:10px;flex-shrink:0}
@@ -83,11 +83,11 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 .player-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .player-avi{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;position:relative}
 .threat-ring{position:absolute;inset:-3px;border-radius:17px;border:2px solid transparent}
-.player-card.threat-high .player-avi{background:linear-gradient(135deg,#3A1820,#5A2030)}
+.player-card.threat-high .player-avi{background:linear-gradient(135deg,#fce8ea,#f9d0d4)}
 .player-card.threat-high .threat-ring{border-color:var(--r)}
-.player-card.threat-med .player-avi{background:linear-gradient(135deg,#3A2B10,#5A4020)}
+.player-card.threat-med .player-avi{background:linear-gradient(135deg,#fef3e2,#fde8c0)}
 .player-card.threat-med .threat-ring{border-color:var(--a)}
-.player-card.threat-low .player-avi{background:linear-gradient(135deg,#103A22,#205A32)}
+.player-card.threat-low .player-avi{background:linear-gradient(135deg,#e6f7ee,#c8eeda)}
 .player-card.threat-low .threat-ring{border-color:var(--g)}
 .player-name{font-size:15px;font-weight:800;color:var(--t1);line-height:1.1}
 .player-pos{font-size:11.5px;color:var(--t3);margin-top:3px}
@@ -96,9 +96,9 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 .player-card.threat-med .player-big-stat{color:var(--a)}
 .player-card.threat-low .player-big-stat{color:var(--g)}
 .player-stat-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
-.player-sub-stats{display:flex;gap:0;margin-top:14px;border-top:1px solid var(--b1);padding-top:14px}
+.player-sub-stats{display:flex;gap:0;margin-top:14px;border-top:1px solid rgba(0,0,0,0.07);padding-top:14px}
 .sub-stat{flex:1;text-align:center}
-.sub-stat:not(:last-child){border-right:1px solid var(--b1)}
+.sub-stat:not(:last-child){border-right:1px solid rgba(0,0,0,0.07)}
 .sub-val{font-size:16px;font-weight:800;color:var(--t1)}
 .sub-lbl{font-size:10px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .threat-bar-wrap{margin-top:14px}
@@ -139,28 +139,28 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 .opp-pill{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 10px 14px;border-radius:13px;cursor:pointer;transition:background .15s;flex-shrink:0;position:relative;text-align:center}
 .opp-pill:hover{background:var(--up)}
 .opp-pill:hover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--og);border-radius:2px 2px 0 0}
-.opp-pill.active{background:rgba(239,48,65,.08)}
+.opp-pill.active{background:rgba(239,48,65,.07)}
 .opp-pill.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--og);border-radius:2px 2px 0 0}
 .opp-pill.active .opp-name{background:linear-gradient(135deg,#ef3041,#ff4d5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.opp-logo{width:50px;height:50px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;padding:5px;flex-shrink:0}
+.opp-logo{width:50px;height:50px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:#ebebec;overflow:hidden;padding:5px;flex-shrink:0}
 .opp-logo img{width:100%;height:100%;object-fit:contain}
-.opp-logo span{font-size:11px;font-weight:800;color:#555}
+.opp-logo span{font-size:11px;font-weight:800;color:#333}
 .opp-name{font-size:13px;font-weight:800;color:#fff;line-height:1.2;white-space:nowrap}
 .opp-date{display:none}
 .opp-comp{display:none}
 .opp-badge{position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--og);color:#000;font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:5px;white-space:nowrap}
 
 ::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.15);border-radius:2px}
 
 /* ── TOPBAR ── */
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:52px;
-  background:rgba(10,10,10,0.92);
+  background:rgba(255,255,255,0.92);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(0,0,0,0.08);
   display:flex;align-items:center;
   padding:0 20px 0 84px;
   gap:12px;
@@ -205,9 +205,9 @@ body{padding-top:52px}
 .next-card-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .next-card-name{font-size:20px;font-weight:900;color:var(--t1);letter-spacing:-.5px;line-height:1.1}
 .next-card-meta{font-size:12px;color:var(--t3);margin-top:4px;font-weight:600}
-.next-card-stats{display:flex;gap:0;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:14px 0}
+.next-card-stats{display:flex;gap:0;border-top:1px solid rgba(0,0,0,0.07);border-bottom:1px solid rgba(0,0,0,0.07);padding:14px 0}
 .next-stat{flex:1;text-align:center}
-.next-stat:not(:last-child){border-right:1px solid var(--b1)}
+.next-stat:not(:last-child){border-right:1px solid rgba(0,0,0,0.07)}
 .next-stat-val{font-size:18px;font-weight:900;color:var(--t1);letter-spacing:-.3px}
 .next-stat-lbl{font-size:10px;color:var(--t3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 
@@ -283,7 +283,7 @@ body{padding-top:52px}
   <div class="topbar-logo">
     <img src="logos/bourg.svg" alt="JL Bourg" onerror="this.src='logo-jlbourg.svg'">
   </div>
-  <div class="topbar-name">JL Bourg</div>
+  <div class="topbar-name" style="color:#0f0f10">JL Bourg</div>
 </div>
 
 <nav>
@@ -453,12 +453,12 @@ body{padding-top:52px}
   <!-- MAIN GRID -->
   <div class="grid-2">
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><rect x="2" y="12" width="4" height="10" rx="1"/><rect x="9" y="7" width="4" height="15" rx="1"/><rect x="16" y="3" width="4" height="19" rx="1"/></svg>Scoring par quart-temps</div>
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><rect x="2" y="12" width="4" height="10" rx="1"/><rect x="9" y="7" width="4" height="15" rx="1"/><rect x="16" y="3" width="4" height="19" rx="1"/></svg>Scoring par quart-temps</div>
       <div class="card-sub">5 derniers matchs — distribution offensive</div>
       <div class="chart-wrap"><canvas id="barChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="15" r="1" fill="white"/><circle cx="12" cy="15" r="1" fill="white"/><circle cx="16" cy="15" r="1" fill="white"/></svg>Derniers matchs</div>
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="15" r="1" fill="white"/><circle cx="12" cy="15" r="1" fill="white"/><circle cx="16" cy="15" r="1" fill="white"/></svg>Derniers matchs</div>
       <div class="card-sub">Résultats récents</div>
       <div class="form-strip">
         <div class="form-badge fb-v">V</div>
@@ -501,19 +501,19 @@ body{padding-top:52px}
   <!-- COURT + RADAR -->
   <div class="grid-2">
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>Carte de tirs — demi-terrain</div>
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>Carte de tirs — demi-terrain</div>
       <div class="card-sub">Zones chaudes &amp; froides · 5 derniers matchs</div>
       <div class="court-wrap">
         <svg viewBox="0 0 420 310" width="100%" style="max-height:270px">
-          <rect x="10" y="10" width="400" height="285" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
-          <rect x="155" y="10" width="110" height="145" rx="3" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
-          <line x1="155" y1="155" x2="265" y2="155" stroke="rgba(255,255,255,0.1)" stroke-width="1.2"/>
-          <path d="M155,155 A55,55 0 0,0 265,155" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
-          <circle cx="210" cy="32" r="8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-          <circle cx="210" cy="32" r="2.5" fill="rgba(255,255,255,0.2)"/>
-          <line x1="190" y1="19" x2="230" y2="19" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-          <path d="M60,295 L60,100 A152,152 0 0,1 360,100 L360,295" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.2"/>
-          <line x1="10" y1="295" x2="410" y2="295" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="10" y="10" width="400" height="285" rx="6" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
+          <rect x="155" y="10" width="110" height="145" rx="3" fill="rgba(0,0,0,0.025)" stroke="rgba(0,0,0,0.08)" stroke-width="1.2"/>
+          <line x1="155" y1="155" x2="265" y2="155" stroke="rgba(0,0,0,0.12)" stroke-width="1.2"/>
+          <path d="M155,155 A55,55 0 0,0 265,155" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1.2"/>
+          <circle cx="210" cy="32" r="8" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+          <circle cx="210" cy="32" r="2.5" fill="rgba(0,0,0,0.2)"/>
+          <line x1="190" y1="19" x2="230" y2="19" stroke="rgba(0,0,0,0.2)" stroke-width="2"/>
+          <path d="M60,295 L60,100 A152,152 0 0,1 360,100 L360,295" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.2"/>
+          <line x1="10" y1="295" x2="410" y2="295" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
           <circle cx="210" cy="90" r="42" fill="rgba(240,79,92,0.28)" stroke="rgba(240,79,92,0.5)" stroke-width="1.5"/>
           <text x="210" y="84" text-anchor="middle" font-size="17" font-weight="800" fill="#F04F5C" font-family="system-ui">61%</text>
           <text x="210" y="101" text-anchor="middle" font-size="9.5" fill="rgba(240,79,92,0.7)" font-family="system-ui">142 tirs</text>
@@ -533,19 +533,19 @@ body{padding-top:52px}
           <text x="210" y="247" text-anchor="middle" font-size="15" font-weight="800" fill="#ef3041" font-family="system-ui">38%</text>
           <text x="210" y="261" text-anchor="middle" font-size="9.5" fill="rgba(245,200,0,0.7)" font-family="system-ui">210 tirs</text>
           <circle cx="28" cy="18" r="5" fill="rgba(240,79,92,0.5)"/>
-          <text x="36" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Chaud</text>
+          <text x="36" y="22" font-size="9.5" fill="rgba(0,0,0,0.45)" font-family="system-ui">Chaud</text>
           <circle cx="80" cy="18" r="5" fill="rgba(245,166,35,0.5)"/>
-          <text x="88" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Tiède</text>
+          <text x="88" y="22" font-size="9.5" fill="rgba(0,0,0,0.45)" font-family="system-ui">Tiède</text>
           <circle cx="132" cy="18" r="5" fill="rgba(61,201,122,0.5)"/>
-          <text x="140" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Froid</text>
+          <text x="140" y="22" font-size="9.5" fill="rgba(0,0,0,0.45)" font-family="system-ui">Froid</text>
         </svg>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><polygon points="12,2 19,8 17,17 7,17 5,8"/><line x1="12" y1="2" x2="17" y2="17"/><line x1="12" y1="2" x2="7" y2="17"/><line x1="12" y1="2" x2="19" y2="8"/><line x1="12" y1="2" x2="5" y2="8"/><line x1="5" y1="8" x2="19" y2="8"/><line x1="7" y1="17" x2="17" y2="17"/></svg>Profil de jeu</div>
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><polygon points="12,2 19,8 17,17 7,17 5,8"/><line x1="12" y1="2" x2="17" y2="17"/><line x1="12" y1="2" x2="7" y2="17"/><line x1="12" y1="2" x2="19" y2="8"/><line x1="12" y1="2" x2="5" y2="8"/><line x1="5" y1="8" x2="19" y2="8"/><line x1="7" y1="17" x2="17" y2="17"/></svg>Profil de jeu</div>
       <div class="card-sub">Monaco vs LDLC ASVEL</div>
       <div class="chart-wrap" style="height:240px"><canvas id="radarChart"></canvas></div>
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--b1)">
+      <div style="display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.07)">
         <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--t2)"><div style="width:10px;height:10px;border-radius:50%;background:var(--o)"></div>AS Monaco</div>
         <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--t2)"><div style="width:10px;height:10px;border-radius:50%;background:#626262"></div>LDLC ASVEL</div>
       </div>
@@ -615,7 +615,7 @@ body{padding-top:52px}
 <script>
 Chart.defaults.color='#7880A0';
 Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
-const tt={backgroundColor:'#1F2233',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,titleColor:'#ECEEF8',bodyColor:'#7880A0',padding:10,cornerRadius:8,boxPadding:4};
+const tt={backgroundColor:'#ffffff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,titleColor:'#0f0f10',bodyColor:'#555558',padding:10,cornerRadius:8,boxPadding:4};
 
 new Chart(document.getElementById('barChart').getContext('2d'),{
   type:'bar',
@@ -630,8 +630,8 @@ new Chart(document.getElementById('barChart').getContext('2d'),{
   },
   options:{
     responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'top',labels:{color:'#7880A0',boxWidth:8,boxHeight:8,font:{size:11},padding:14,usePointStyle:true,pointStyle:'circle'}},tooltip:tt},
-    scales:{x:{stacked:true,grid:{display:false},ticks:{color:'#404560',font:{size:11}}},y:{stacked:true,grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#404560',font:{size:11}},beginAtZero:true}}
+    plugins:{legend:{position:'top',labels:{color:'#9a9a9e',boxWidth:8,boxHeight:8,font:{size:11},padding:14,usePointStyle:true,pointStyle:'circle'}},tooltip:tt},
+    scales:{x:{stacked:true,grid:{display:false},ticks:{color:'#9a9a9e',font:{size:11}}},y:{stacked:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{color:'#9a9a9e',font:{size:11}},beginAtZero:true}}
   }
 });
 
@@ -640,14 +640,14 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
   data:{
     labels:['Attaque','Rebond','Passes','3 pts','Défense','Vitesse'],
     datasets:[
-      {label:'AS Monaco',data:[88,72,80,75,68,85],backgroundColor:'rgba(239,48,65,.13)',borderColor:'#ef3041',borderWidth:2,pointBackgroundColor:'#ef3041',pointRadius:4,pointBorderWidth:0},
-      {label:'LDLC ASVEL',data:[82,80,75,68,79,72],backgroundColor:'rgba(98,98,98,.13)',borderColor:'#777',borderWidth:2,pointBackgroundColor:'#777',pointRadius:4,pointBorderWidth:0}
+      {label:'AS Monaco',data:[88,72,80,75,68,85],backgroundColor:'rgba(239,48,65,.1)',borderColor:'#ef3041',borderWidth:2,pointBackgroundColor:'#ef3041',pointRadius:4,pointBorderWidth:0},
+      {label:'LDLC ASVEL',data:[82,80,75,68,79,72],backgroundColor:'rgba(0,0,0,0.06)',borderColor:'#aaaaaa',borderWidth:2,pointBackgroundColor:'#aaaaaa',pointRadius:4,pointBorderWidth:0}
     ]
   },
   options:{
     responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:tt},
-    scales:{r:{backgroundColor:'transparent',grid:{color:'rgba(255,255,255,0.05)'},angleLines:{color:'rgba(255,255,255,0.05)'},pointLabels:{color:'#7880A0',font:{size:11.5}},ticks:{display:false,stepSize:25},min:0,max:100}}
+    scales:{r:{backgroundColor:'transparent',grid:{color:'rgba(0,0,0,0.06)'},angleLines:{color:'rgba(0,0,0,0.06)'},pointLabels:{color:'#9a9a9e',font:{size:11.5}},ticks:{display:false,stepSize:25},min:0,max:100}}
   }
 });
 
