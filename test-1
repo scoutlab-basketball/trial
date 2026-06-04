@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scout Lab</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#0A0A0A;--s:#111111;--card:#1E1E1E;--up:#2A2A2A;
+  --b1:rgba(255,255,255,0.09);--b2:rgba(255,255,255,0.16);
+  --o:#F0A020;--o2:#F5C800;
+  --og:linear-gradient(135deg,#D46800,#F5C400);
+  --od:rgba(240,160,32,.16);
+  --t1:#FFFFFF;--t2:#AAAAAA;--t3:#777777;
+  --g:#3DC97A;--r:#F04F5C;--a:#F5A623;
+}
+
+html{font-size:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── SIDEBAR ── */
+nav{width:72px;min-height:100vh;background:var(--s);display:flex;flex-direction:column;align-items:center;padding:18px 0;position:fixed;top:0;left:0;bottom:0;z-index:99}
+.nav-logo{width:38px;height:38px;background:var(--og);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#000;box-shadow:0 4px 18px rgba(213,120,0,.45);margin-bottom:28px;flex-shrink:0}
+.nav-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--t3);cursor:pointer;transition:all .15s;margin-bottom:4px;position:relative}
+.nav-ico svg{width:20px;height:20px}
+.nav-ico:hover{background:var(--up);color:var(--t2)}
+.nav-ico.on{background:var(--od);color:var(--o)}
+.nav-ico .dot{position:absolute;top:7px;right:7px;width:6px;height:6px;border-radius:50%;background:var(--o)}
+.nav-spacer{flex:1}
+.nav-user{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--o),#F5C400);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;cursor:pointer;margin-top:8px}
+
+/* ── MAIN ── */
+main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:column;gap:22px;min-width:0}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0E0E0E 0%,#161616 100%);border-radius:20px;padding:28px 32px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;gap:20px}
+.hero::before{content:'';position:absolute;top:-60px;right:180px;width:260px;height:260px;background:radial-gradient(circle,rgba(240,160,32,.07) 0%,transparent 65%);pointer-events:none}
+.hero-name{font-size:42px;font-weight:900;color:var(--t1);letter-spacing:-2px;line-height:1}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center}
+.swot-col{display:flex;flex-direction:column;gap:5px}
+.swot-title{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
+.swot-title-g{color:var(--g)}.swot-title-r{color:var(--r)}
+.swot-item{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--t2);line-height:1.3}
+.swot-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.swot-item-g .swot-dot{background:var(--g)}.swot-item-r .swot-dot{background:var(--r)}
+.hero-stats{display:flex;gap:8px}
+.hero-stat{text-align:center;background:rgba(255,255,255,.05);border-radius:12px;padding:14px 0;width:100px;flex-shrink:0}
+.hero-stat-val{font-size:24px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1}
+.hero-stat-lbl{font-size:11px;color:#fff;opacity:.55;margin-top:8px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;padding:0 6px}
+
+/* ── GRID ── */
+.grid-2{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+/* ── CARD ── */
+.card{background:var(--card);border-radius:18px;padding:24px;position:relative;overflow:hidden}
+.card-title{font-size:24px;font-weight:800;color:var(--t1);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.card-title svg{width:22px;height:22px;flex-shrink:0;opacity:.9}
+.card-sub{font-size:15px;color:var(--t3);margin-bottom:18px}
+
+/* ── FORM STRIP ── */
+.form-strip{display:flex;gap:8px;align-items:center;margin-bottom:18px}
+.form-badge{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.fb-v{background:rgba(61,201,122,.14);color:var(--g)}.fb-d{background:rgba(240,79,92,.14);color:var(--r)}
+.form-game{flex:1;padding:10px 14px;background:rgba(255,255,255,.025);border-radius:10px;display:flex;align-items:center;justify-content:space-between}
+.form-opp{font-size:12.5px;font-weight:600;color:var(--t1)}
+.form-score{font-size:12.5px;font-weight:700;color:var(--t2);font-variant-numeric:tabular-nums}
+.form-date{font-size:11px;color:var(--t3);margin-left:10px;flex-shrink:0}
+
+/* ── CHART ── */
+.chart-wrap{position:relative;height:260px}
+
+/* ── COURT ── */
+.court-wrap{display:flex;justify-content:center;align-items:center;padding:8px 0}
+
+/* ── PLAYER CARDS ── */
+.player-card{background:var(--card);border-radius:18px;padding:22px 20px 20px;transition:transform .2s;cursor:pointer}
+.player-card:hover{transform:translateY(-2px)}
+.player-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.player-avi{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;position:relative}
+.threat-ring{position:absolute;inset:-3px;border-radius:17px;border:2px solid transparent}
+.player-card.threat-high .player-avi{background:linear-gradient(135deg,#3A1820,#5A2030)}
+.player-card.threat-high .threat-ring{border-color:var(--r)}
+.player-card.threat-med .player-avi{background:linear-gradient(135deg,#3A2B10,#5A4020)}
+.player-card.threat-med .threat-ring{border-color:var(--a)}
+.player-card.threat-low .player-avi{background:linear-gradient(135deg,#103A22,#205A32)}
+.player-card.threat-low .threat-ring{border-color:var(--g)}
+.player-name{font-size:15px;font-weight:800;color:var(--t1);line-height:1.1}
+.player-pos{font-size:11.5px;color:var(--t3);margin-top:3px}
+.player-big-stat{font-size:52px;font-weight:900;letter-spacing:-3px;line-height:1;margin-bottom:4px}
+.player-card.threat-high .player-big-stat{color:var(--r)}
+.player-card.threat-med .player-big-stat{color:var(--a)}
+.player-card.threat-low .player-big-stat{color:var(--g)}
+.player-stat-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+.player-sub-stats{display:flex;gap:0;margin-top:14px;border-top:1px solid var(--b1);padding-top:14px}
+.sub-stat{flex:1;text-align:center}
+.sub-stat:not(:last-child){border-right:1px solid var(--b1)}
+.sub-val{font-size:16px;font-weight:800;color:var(--t1)}
+.sub-lbl{font-size:10px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.threat-bar-wrap{margin-top:14px}
+.threat-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.threat-lbl-text{font-size:11px;color:var(--t3);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.threat-score-text{font-size:12px;font-weight:800}
+.player-card.threat-high .threat-score-text{color:var(--r)}
+.player-card.threat-med .threat-score-text{color:var(--a)}
+.player-card.threat-low .threat-score-text{color:var(--g)}
+.threat-track{height:5px;background:var(--b1);border-radius:3px;overflow:hidden}
+.threat-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.player-card.threat-high .threat-fill{background:linear-gradient(90deg,var(--r),#FF8090)}
+.player-card.threat-med .threat-fill{background:linear-gradient(90deg,var(--a),#FFD080)}
+.player-card.threat-low .threat-fill{background:linear-gradient(90deg,var(--g),#80FFB0)}
+
+/* ── SEASON SLIDER ── */
+.slider-card{background:var(--card);border-radius:18px;padding:18px 20px 20px}
+.slider-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
+.slider-title{font-size:20px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#D46800,#F5C400);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
+
+/* Pills desktop */
+.filter-pills{display:flex;gap:6px}
+.filter-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;transition:all .15s;white-space:nowrap;border:1.5px solid var(--up);background:transparent;letter-spacing:.1px}
+.filter-pill:hover{color:var(--t1);border-color:var(--t3)}
+.filter-pill.on{background:var(--og);border-color:transparent;color:#000;box-shadow:0 2px 10px rgba(212,104,0,.3)}
+
+/* Select mobile (caché sur desktop) */
+.filter-select{display:none}
+
+.slider-controls{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.slider-arrow{width:30px;height:30px;border-radius:8px;background:var(--up);border:none;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.slider-arrow:hover{background:#333;color:var(--t1)}
+.slider-arrow:disabled{opacity:.2;cursor:not-allowed}
+.slider-arrow svg{width:16px;height:16px}
+.slider-viewport{overflow:hidden}
+.slider-track{display:flex;gap:10px;transition:transform .32s cubic-bezier(.4,0,.2,1);will-change:transform}
+
+.opp-pill{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 10px 14px;border-radius:13px;cursor:pointer;transition:background .15s;flex-shrink:0;position:relative;text-align:center}
+.opp-pill:hover{background:var(--up)}
+.opp-pill:hover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--og);border-radius:2px 2px 0 0}
+.opp-pill.active{background:rgba(240,160,32,.08)}
+.opp-pill.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--og);border-radius:2px 2px 0 0}
+.opp-pill.active .opp-name{background:linear-gradient(135deg,#D46800,#F5C400);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.opp-logo{width:50px;height:50px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;padding:5px;flex-shrink:0}
+.opp-logo img{width:100%;height:100%;object-fit:contain}
+.opp-logo span{font-size:11px;font-weight:800;color:#555}
+.opp-name{font-size:13px;font-weight:800;color:#fff;line-height:1.2;white-space:nowrap}
+.opp-date{display:none}
+.opp-comp{display:none}
+.opp-badge{position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--og);color:#000;font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:5px;white-space:nowrap}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:52px;
+  background:rgba(10,10,10,0.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;
+  padding:0 20px 0 84px;
+  gap:12px;
+}
+.topbar-logo{width:34px;height:34px;flex-shrink:0}
+.topbar-logo img{width:100%;height:100%;object-fit:contain}
+.topbar-name{
+  font-size:17px;font-weight:900;letter-spacing:-.4px;color:var(--t1);
+}
+body{padding-top:52px}
+
+/* ── MOBILE ── */
+@media (max-width:767px){
+  main{margin-left:0;padding:14px 12px;gap:14px}
+  nav{display:none}
+  .topbar{padding-left:16px}
+
+  .slider-card{padding:14px 14px 16px}
+  .slider-header{flex-wrap:nowrap;margin-bottom:10px;gap:8px;align-items:center}
+  .slider-title{font-size:17px}
+
+  /* Cacher pills, montrer select */
+  .filter-pills{display:none}
+  .filter-select{
+    display:block;
+    background:var(--up);
+    border:1.5px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    color:var(--t1);
+    font-size:12px;
+    font-weight:700;
+    padding:6px 10px;
+    cursor:pointer;
+    flex-shrink:0;
+    -webkit-appearance:none;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 8px center;
+    padding-right:26px;
+  }
+  .filter-select option{background:#1E1E1E;color:#fff}
+
+  /* Cacher les flèches */
+  .slider-controls{display:none}
+
+  /* Swipe natif */
+  .slider-viewport{
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .slider-viewport::-webkit-scrollbar{display:none}
+  .slider-track{transition:none}
+  .opp-pill{scroll-snap-align:start}
+
+  /* Noms sur 2 lignes */
+  .opp-name{white-space:normal;word-break:break-word;font-size:11px;line-height:1.25;max-width:100%}
+  .opp-logo{width:44px;height:44px;border-radius:10px}
+
+  .hero{grid-template-columns:1fr;padding:18px 16px;gap:16px}
+  .hero-name{font-size:26px;letter-spacing:-1px}
+  .hero-stats{flex-wrap:wrap}
+  .hero-stat{width:calc(33% - 6px);padding:10px 0}
+  .hero-stat-val{font-size:18px}
+  .hero-stat-lbl{font-size:9px}
+  .swot{margin-top:4px}
+  .grid-2{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .card{padding:16px}
+  .card-title{font-size:18px}
+  .card-sub{font-size:13px;margin-bottom:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="logos/bourg.svg" alt="JL Bourg" onerror="this.src='logo-jlbourg.svg'">
+  </div>
+  <div class="topbar-name">JL Bourg</div>
+</div>
+
+<nav>
+  <div class="nav-logo">SL</div>
+  <div class="nav-ico on" title="Adversaires">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="dot"></span>
+  </div>
+  <div class="nav-ico" title="Statistiques">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+  </div>
+  <div class="nav-ico" title="Vidéos">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+  </div>
+  <div class="nav-ico" title="Rapports">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+  </div>
+  <div class="nav-spacer"></div>
+  <div class="nav-ico" title="Paramètres">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+  </div>
+  <div class="nav-user" title="Charly B.">CB</div>
+</nav>
+
+<main>
+
+  <!-- SEASON SLIDER -->
+  <div class="slider-card">
+    <div class="slider-header">
+      <div class="slider-title">Adversaires</div>
+      <!-- Pills desktop -->
+      <div class="filter-pills">
+        <button class="filter-pill on" onclick="setFilter('all',this)">Tous</button>
+        <button class="filter-pill" onclick="setFilter('be',this)">Betclic Élite</button>
+        <button class="filter-pill" onclick="setFilter('el',this)">EuroLeague</button>
+      </div>
+      <!-- Select mobile -->
+      <select class="filter-select" id="filterSelect" onchange="setFilterMobile(this.value)">
+        <option value="all">Tous</option>
+        <option value="be">Betclic Élite</option>
+        <option value="el">EuroLeague</option>
+      </select>
+      <!-- Flèches desktop uniquement -->
+      <div class="slider-controls">
+        <button class="slider-arrow" id="btnPrev" onclick="slideMove(-1)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="slider-arrow" id="btnNext" onclick="slideMove(1)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="slider-viewport" id="sliderViewport">
+      <div class="slider-track" id="sliderTrack"></div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="opp-logo" style="width:56px;height:56px;border-radius:12px;flex-shrink:0">
+          <img src="logos/monaco.svg" alt="AS Monaco Basket" onerror="this.parentNode.innerHTML='<span>MCO</span>'">
+        </div>
+        <div class="hero-name">AS Monaco Basket</div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val">88.4</div><div class="hero-stat-lbl">Pts / match</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">42.1</div><div class="hero-stat-lbl">Rbds / match</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">21.8</div><div class="hero-stat-lbl">Passes</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">49%</div><div class="hero-stat-lbl">FG%</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">37%</div><div class="hero-stat-lbl">3pts%</div></div>
+      </div>
+    </div>
+    <div class="swot">
+      <div class="swot-col">
+        <div class="swot-title swot-title-g">Points forts</div>
+        <div class="swot-item swot-item-g"><span class="swot-dot"></span>Transition offensive</div>
+        <div class="swot-item swot-item-g"><span class="swot-dot"></span>Adresse à 3pts (37%)</div>
+        <div class="swot-item swot-item-g"><span class="swot-dot"></span>Défense périmétrique</div>
+      </div>
+      <div class="swot-col">
+        <div class="swot-title swot-title-r">Points faibles</div>
+        <div class="swot-item swot-item-r"><span class="swot-dot"></span>Pertes de balle (13.2)</div>
+        <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rebond offensif</div>
+        <div class="swot-item swot-item-r"><span class="swot-dot"></span>Rythme en 2e mi-temps</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><rect x="2" y="12" width="4" height="10" rx="1"/><rect x="9" y="7" width="4" height="15" rx="1"/><rect x="16" y="3" width="4" height="19" rx="1"/></svg>Scoring par quart-temps</div>
+      <div class="card-sub">5 derniers matchs — distribution offensive</div>
+      <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="15" r="1" fill="white"/><circle cx="12" cy="15" r="1" fill="white"/><circle cx="16" cy="15" r="1" fill="white"/></svg>Derniers matchs</div>
+      <div class="card-sub">Résultats récents</div>
+      <div class="form-strip">
+        <div class="form-badge fb-v">V</div>
+        <div class="form-game">
+          <div><div class="form-opp">vs Paris Basketball</div><div style="font-size:11px;color:var(--t3)">Betclic Élite PO</div></div>
+          <div class="form-score">92 – 84</div><div class="form-date">02/06</div>
+        </div>
+      </div>
+      <div class="form-strip">
+        <div class="form-badge fb-d">D</div>
+        <div class="form-game">
+          <div><div class="form-opp">@ Fenerbahçe</div><div style="font-size:11px;color:var(--t3)">EuroLeague J33</div></div>
+          <div class="form-score">71 – 89</div><div class="form-date">25/05</div>
+        </div>
+      </div>
+      <div class="form-strip">
+        <div class="form-badge fb-v">V</div>
+        <div class="form-game">
+          <div><div class="form-opp">vs Boulogne-Lev.</div><div style="font-size:11px;color:var(--t3)">Betclic Élite J33</div></div>
+          <div class="form-score">88 – 76</div><div class="form-date">18/05</div>
+        </div>
+      </div>
+      <div class="form-strip">
+        <div class="form-badge fb-v">V</div>
+        <div class="form-game">
+          <div><div class="form-opp">@ ALBA Berlin</div><div style="font-size:11px;color:var(--t3)">EuroLeague J32</div></div>
+          <div class="form-score">95 – 90</div><div class="form-date">12/05</div>
+        </div>
+      </div>
+      <div class="form-strip">
+        <div class="form-badge fb-d">D</div>
+        <div class="form-game">
+          <div><div class="form-opp">vs Métropolitans 92</div><div style="font-size:11px;color:var(--t3)">Betclic Élite J32</div></div>
+          <div class="form-score">79 – 83</div><div class="form-date">05/05</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURT + RADAR -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>Carte de tirs — demi-terrain</div>
+      <div class="card-sub">Zones chaudes &amp; froides · 5 derniers matchs</div>
+      <div class="court-wrap">
+        <svg viewBox="0 0 420 310" width="100%" style="max-height:270px">
+          <rect x="10" y="10" width="400" height="285" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <rect x="155" y="10" width="110" height="145" rx="3" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+          <line x1="155" y1="155" x2="265" y2="155" stroke="rgba(255,255,255,0.1)" stroke-width="1.2"/>
+          <path d="M155,155 A55,55 0 0,0 265,155" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+          <circle cx="210" cy="32" r="8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+          <circle cx="210" cy="32" r="2.5" fill="rgba(255,255,255,0.2)"/>
+          <line x1="190" y1="19" x2="230" y2="19" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+          <path d="M60,295 L60,100 A152,152 0 0,1 360,100 L360,295" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.2"/>
+          <line x1="10" y1="295" x2="410" y2="295" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <circle cx="210" cy="90" r="42" fill="rgba(240,79,92,0.28)" stroke="rgba(240,79,92,0.5)" stroke-width="1.5"/>
+          <text x="210" y="84" text-anchor="middle" font-size="17" font-weight="800" fill="#F04F5C" font-family="system-ui">61%</text>
+          <text x="210" y="101" text-anchor="middle" font-size="9.5" fill="rgba(240,79,92,0.7)" font-family="system-ui">142 tirs</text>
+          <circle cx="122" cy="168" r="34" fill="rgba(245,166,35,0.22)" stroke="rgba(245,166,35,0.4)" stroke-width="1.5"/>
+          <text x="122" y="163" text-anchor="middle" font-size="15" font-weight="800" fill="#F5A623" font-family="system-ui">44%</text>
+          <text x="122" y="177" text-anchor="middle" font-size="9.5" fill="rgba(245,166,35,0.7)" font-family="system-ui">58 tirs</text>
+          <circle cx="298" cy="168" r="34" fill="rgba(61,201,122,0.18)" stroke="rgba(61,201,122,0.35)" stroke-width="1.5"/>
+          <text x="298" y="163" text-anchor="middle" font-size="15" font-weight="800" fill="#3DC97A" font-family="system-ui">29%</text>
+          <text x="298" y="177" text-anchor="middle" font-size="9.5" fill="rgba(61,201,122,0.7)" font-family="system-ui">38 tirs</text>
+          <circle cx="45" cy="235" r="30" fill="rgba(245,166,35,0.20)" stroke="rgba(245,166,35,0.38)" stroke-width="1.5"/>
+          <text x="45" y="230" text-anchor="middle" font-size="14" font-weight="800" fill="#F5A623" font-family="system-ui">42%</text>
+          <text x="45" y="244" text-anchor="middle" font-size="9" fill="rgba(245,166,35,0.7)" font-family="system-ui">88 tirs</text>
+          <circle cx="375" cy="235" r="30" fill="rgba(245,166,35,0.18)" stroke="rgba(245,166,35,0.35)" stroke-width="1.5"/>
+          <text x="375" y="230" text-anchor="middle" font-size="14" font-weight="800" fill="#F5A623" font-family="system-ui">40%</text>
+          <text x="375" y="244" text-anchor="middle" font-size="9" fill="rgba(245,166,35,0.7)" font-family="system-ui">72 tirs</text>
+          <circle cx="210" cy="252" r="36" fill="rgba(212,104,0,0.20)" stroke="rgba(245,200,0,0.4)" stroke-width="1.5"/>
+          <text x="210" y="247" text-anchor="middle" font-size="15" font-weight="800" fill="#F5C400" font-family="system-ui">38%</text>
+          <text x="210" y="261" text-anchor="middle" font-size="9.5" fill="rgba(245,200,0,0.7)" font-family="system-ui">210 tirs</text>
+          <circle cx="28" cy="18" r="5" fill="rgba(240,79,92,0.5)"/>
+          <text x="36" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Chaud</text>
+          <circle cx="80" cy="18" r="5" fill="rgba(245,166,35,0.5)"/>
+          <text x="88" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Tiède</text>
+          <circle cx="132" cy="18" r="5" fill="rgba(61,201,122,0.5)"/>
+          <text x="140" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Froid</text>
+        </svg>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><polygon points="12,2 19,8 17,17 7,17 5,8"/><line x1="12" y1="2" x2="17" y2="17"/><line x1="12" y1="2" x2="7" y2="17"/><line x1="12" y1="2" x2="19" y2="8"/><line x1="12" y1="2" x2="5" y2="8"/><line x1="5" y1="8" x2="19" y2="8"/><line x1="7" y1="17" x2="17" y2="17"/></svg>Profil de jeu</div>
+      <div class="card-sub">Monaco vs LDLC ASVEL</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="radarChart"></canvas></div>
+      <div style="display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--b1)">
+        <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--t2)"><div style="width:10px;height:10px;border-radius:50%;background:var(--o)"></div>AS Monaco</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--t2)"><div style="width:10px;height:10px;border-radius:50%;background:#626262"></div>LDLC ASVEL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER CARDS -->
+  <div>
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:14px">Joueurs à surveiller</div>
+    <div class="grid-3">
+      <div class="player-card threat-high">
+        <div class="player-head">
+          <div class="player-avi"><div class="threat-ring"></div>MJ</div>
+          <div><div class="player-name">Mike James</div><div class="player-pos">Meneur · #2</div></div>
+        </div>
+        <div class="player-big-stat">19.4</div>
+        <div class="player-stat-label">Points par match</div>
+        <div class="player-sub-stats">
+          <div class="sub-stat"><div class="sub-val">7.2</div><div class="sub-lbl">Passes</div></div>
+          <div class="sub-stat"><div class="sub-val">46%</div><div class="sub-lbl">FG%</div></div>
+          <div class="sub-stat"><div class="sub-val">3.1</div><div class="sub-lbl">Rbds</div></div>
+        </div>
+        <div class="threat-bar-wrap">
+          <div class="threat-label-row"><span class="threat-lbl-text">Menace</span><span class="threat-score-text">90 / 100</span></div>
+          <div class="threat-track"><div class="threat-fill" style="width:90%"></div></div>
+        </div>
+      </div>
+      <div class="player-card threat-med">
+        <div class="player-head">
+          <div class="player-avi"><div class="threat-ring"></div>JB</div>
+          <div><div class="player-name">Jordan Brown</div><div class="player-pos">Pivot · #15</div></div>
+        </div>
+        <div class="player-big-stat">9.6</div>
+        <div class="player-stat-label">Rebonds par match</div>
+        <div class="player-sub-stats">
+          <div class="sub-stat"><div class="sub-val">14.8</div><div class="sub-lbl">Points</div></div>
+          <div class="sub-stat"><div class="sub-val">55%</div><div class="sub-lbl">FG%</div></div>
+          <div class="sub-stat"><div class="sub-val">1.8</div><div class="sub-lbl">Passes</div></div>
+        </div>
+        <div class="threat-bar-wrap">
+          <div class="threat-label-row"><span class="threat-lbl-text">Menace</span><span class="threat-score-text">72 / 100</span></div>
+          <div class="threat-track"><div class="threat-fill" style="width:72%"></div></div>
+        </div>
+      </div>
+      <div class="player-card threat-med">
+        <div class="player-head">
+          <div class="player-avi"><div class="threat-ring"></div>DH</div>
+          <div><div class="player-name">Donovan Hall</div><div class="player-pos">Ailier · #8</div></div>
+        </div>
+        <div class="player-big-stat">12.3</div>
+        <div class="player-stat-label">Points par match</div>
+        <div class="player-sub-stats">
+          <div class="sub-stat"><div class="sub-val">4.5</div><div class="sub-lbl">Rbds</div></div>
+          <div class="sub-stat"><div class="sub-val">42%</div><div class="sub-lbl">FG%</div></div>
+          <div class="sub-stat"><div class="sub-val">3.2</div><div class="sub-lbl">Passes</div></div>
+        </div>
+        <div class="threat-bar-wrap">
+          <div class="threat-label-row"><span class="threat-lbl-text">Menace</span><span class="threat-score-text">65 / 100</span></div>
+          <div class="threat-track"><div class="threat-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+Chart.defaults.color='#7880A0';
+Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+const tt={backgroundColor:'#1F2233',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,titleColor:'#ECEEF8',bodyColor:'#7880A0',padding:10,cornerRadius:8,boxPadding:4};
+
+new Chart(document.getElementById('barChart').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['Paris BK','Fenerbahçe','Boulogne','ALBA','Mets 92'],
+    datasets:[
+      {label:'Q1',data:[22,18,25,21,19],backgroundColor:'#D46800',borderRadius:5,borderSkipped:false},
+      {label:'Q2',data:[20,24,19,23,22],backgroundColor:'#E08C00',borderRadius:5,borderSkipped:false},
+      {label:'Q3',data:[18,22,23,19,25],backgroundColor:'#EFB000',borderRadius:5,borderSkipped:false},
+      {label:'Q4',data:[24,7,21,32,13],backgroundColor:'#F5C800',borderRadius:5,borderSkipped:false},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{color:'#7880A0',boxWidth:8,boxHeight:8,font:{size:11},padding:14,usePointStyle:true,pointStyle:'circle'}},tooltip:tt},
+    scales:{x:{stacked:true,grid:{display:false},ticks:{color:'#404560',font:{size:11}}},y:{stacked:true,grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#404560',font:{size:11}},beginAtZero:true}}
+  }
+});
+
+new Chart(document.getElementById('radarChart').getContext('2d'),{
+  type:'radar',
+  data:{
+    labels:['Attaque','Rebond','Passes','3 pts','Défense','Vitesse'],
+    datasets:[
+      {label:'AS Monaco',data:[88,72,80,75,68,85],backgroundColor:'rgba(212,104,0,.13)',borderColor:'#F0A020',borderWidth:2,pointBackgroundColor:'#F5C400',pointRadius:4,pointBorderWidth:0},
+      {label:'LDLC ASVEL',data:[82,80,75,68,79,72],backgroundColor:'rgba(98,98,98,.13)',borderColor:'#777',borderWidth:2,pointBackgroundColor:'#777',pointRadius:4,pointBorderWidth:0}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:tt},
+    scales:{r:{backgroundColor:'transparent',grid:{color:'rgba(255,255,255,0.05)'},angleLines:{color:'rgba(255,255,255,0.05)'},pointLabels:{color:'#7880A0',font:{size:11.5}},ticks:{display:false,stepSize:25},min:0,max:100}}
+  }
+});
+
+document.querySelectorAll('.nav-ico').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-ico').forEach(n=>n.classList.remove('on'));
+    el.classList.add('on');
+  });
+});
+
+// ── SEASON SLIDER ──────────────────────────────────────────────
+const L = {
+  monaco:'logos/monaco.svg',par:'logos/paris.svg',asv:'logos/asvel.svg',
+  lms:'logos/lemans.svg',bourg:'logos/bourg.svg',cho:'logos/cholet.svg',
+  cha:'logos/chalon.svg',dij:'logos/dijon.svg',nan:'logos/nanterre.svg',
+  sig:'logos/strasbourg.svg',lim:'logos/limoges.svg',ncy:'logos/nancy.svg',
+  bbd:'logos/boulazac.svg',grav:'logos/gravelines.svg',sqb:'logos/saintquentin.svg',
+  por:'logos/leportel.svg',met:'logos/metro.svg',pau:'logos/pau.svg',
+  fen:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Fenerbah%C3%A7e_Spor_Kul%C3%BCb%C3%BC_%28logo%2C_1923%29.svg/60px-Fenerbah%C3%A7e_Spor_Kul%C3%BCb%C3%BC_%28logo%2C_1923%29.svg.png',
+  mad:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/RealMadrid_baloncesto.png/60px-RealMadrid_baloncesto.png',
+  alb:'https://upload.wikimedia.org/wikipedia/de/thumb/7/76/Logo_ALBA_Berlin.svg/60px-Logo_ALBA_Berlin.svg.png',
+  pan:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Panathinaikos_BC_logo.png/60px-Panathinaikos_BC_logo.png',
+  bar:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/FC_Barcelona_%28basketball%29_logo.svg/60px-FC_Barcelona_%28basketball%29_logo.svg.png',
+  mac:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Maccabi_Tel_Aviv_BC_logo.png/60px-Maccabi_Tel_Aviv_BC_logo.png',
+  oly:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Olympiacos_BC_logo.svg/60px-Olympiacos_BC_logo.svg.png',
+  bay:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Bayern_Munich_Basketball_logo.svg/60px-Bayern_Munich_Basketball_logo.svg.png',
+  bas:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Baskonia_logo.svg/60px-Baskonia_logo.svg.png',
+  efe:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Anadolu_Efes_S.K._logo.svg/60px-Anadolu_Efes_S.K._logo.svg.png',
+  zal:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Zalgiris_logo.svg/60px-Zalgiris_logo.svg.png',
+};
+
+const MATCHES = [
+  ['Métropolitans 92','MET','met','3 oct.','be',true],
+  ['Panathinaikos','PAN','pan','10 oct.','el',true],
+  ['SIG Strasbourg','SIG','sig','17 oct.','be',true],
+  ['FC Barcelona','BAR','bar','24 oct.','el',true],
+  ['Cholet Basket','CHO','cho','31 oct.','be',true],
+  ['Bayern Munich','BAY','bay','7 nov.','el',true],
+  ['Limoges CSP','LIM','lim','14 nov.','be',true],
+  ['Real Madrid','MAD','mad','21 nov.','el',true],
+  ['Pau-Lacq-Orthez','PAU','pau','28 nov.','be',true],
+  ['Fenerbahçe','FEN','fen','5 déc.','el',true],
+  ['Maccabi Tel Aviv','MAC','mac','12 déc.','el',true],
+  ['Le Mans Sarthe','LMS','lms','19 déc.','be',true],
+  ['Olympiacos','OLY','oly','9 janv.','el',true],
+  ['ALBA Berlin','ALB','alb','16 janv.','el',true],
+  ['Anadolu Efes','EFE','efe','23 janv.','el',true],
+  ['SIG Strasbourg','SIG','sig','30 janv.','be',true],
+  ['Žalgiris','ZAL','zal','6 févr.','el',true],
+  ['Métropolitans 92','MET','met','13 févr.','be',true],
+  ['FC Barcelona','BAR','bar','20 févr.','el',true],
+  ['Cholet Basket','CHO','cho','27 févr.','be',true],
+  ['Real Madrid','MAD','mad','6 mars','el',true],
+  ['Baskonia','BAS','bas','13 mars','el',true],
+  ['Pau-Lacq-Orthez','PAU',null,'20 mars','be',true],
+  ['Panathinaikos','PAN','pan','27 mars','el',true],
+  ['Limoges CSP','LIM','lim','3 avr.','be',true],
+  ['Bayern Munich','BAY','bay','10 avr.','el',true],
+  ['Paris Basketball','PAR','par','17 avr.','be',true],
+  ['Fenerbahçe','FEN','fen','24 avr.','el',true],
+  ['Le Mans Sarthe','LMS',null,'1 mai','be',true],
+  ['Maccabi Tel Aviv','MAC','mac','8 mai','el',true],
+  ['AS Monaco','MCO',null,'14 juin','po',false],
+  ['Paris Basketball','PAR','par','21 juin','po',false],
+];
+
+const ACTIVE_IDX = 30;
+const GAP = 8;
+let sliderOffset = 0;
+let pillW = 0;
+let activeFilter = 'all';
+let filteredMatches = [];
+let isMobile = false;
+
+function getVisible() { return window.innerWidth < 768 ? 3 : 10; }
+function checkMobile() { return window.innerWidth < 768; }
+function getFiltered() {
+  return activeFilter === 'all' ? MATCHES : MATCHES.filter(m => m[4] === activeFilter);
+}
+
+function buildSlider() {
+  filteredMatches = getFiltered();
+  isMobile = checkMobile();
+  const VISIBLE = getVisible();
+  const viewport = document.getElementById('sliderViewport');
+  pillW = Math.floor((viewport.offsetWidth - GAP * (VISIBLE - 1)) / VISIBLE);
+
+  const track = document.getElementById('sliderTrack');
+  track.innerHTML = filteredMatches.map((m, i) => {
+    const [name, short, logoKey, date, comp, past] = m;
+    const origIdx = MATCHES.indexOf(m);
+    const logoUrl = logoKey && L[logoKey] ? L[logoKey] : null;
+    const logoHtml = logoUrl
+      ? `<img src="${logoUrl}" alt="${name}" onerror="this.parentNode.innerHTML='<span>${short}</span>'">`
+      : `<span>${short}</span>`;
+    const isActive = origIdx === ACTIVE_IDX;
+    return `<div class="opp-pill${isActive ? ' active' : ''}${past ? ' past' : ''}"
+      style="width:${pillW}px;min-width:${pillW}px"
+      onclick="selectOppIdx(${i})">
+      ${isActive ? '<span class="opp-badge">Prochain</span>' : ''}
+      <div class="opp-logo">${logoHtml}</div>
+      <div class="opp-name">${name}</div>
+      <div class="opp-date">${date}</div>
+    </div>`;
+  }).join('');
+
+  const activeInFiltered = filteredMatches.findIndex(m => MATCHES.indexOf(m) === ACTIVE_IDX);
+
+  if (isMobile) {
+    viewport.style.overflowX = 'auto';
+    track.style.transform = '';
+    if (activeInFiltered >= 0) {
+      setTimeout(() => {
+        viewport.scrollLeft = Math.max(0, activeInFiltered - 1) * (pillW + GAP);
+      }, 50);
+    }
+  } else {
+    viewport.style.overflowX = 'hidden';
+    sliderOffset = activeInFiltered >= 0
+      ? Math.max(0, Math.min(activeInFiltered - Math.floor(VISIBLE / 2), filteredMatches.length - VISIBLE))
+      : 0;
+    updateSlider();
+  }
+}
+
+function updateSlider() {
+  if (isMobile) return;
+  const VISIBLE = getVisible();
+  const step = pillW + GAP;
+  document.getElementById('sliderTrack').style.transform = `translateX(-${sliderOffset * step}px)`;
+  document.getElementById('btnPrev').disabled = sliderOffset === 0;
+  document.getElementById('btnNext').disabled = sliderOffset >= filteredMatches.length - VISIBLE;
+}
+
+function slideMove(dir) {
+  if (isMobile) return;
+  const VISIBLE = getVisible();
+  sliderOffset = Math.max(0, Math.min(sliderOffset + dir, filteredMatches.length - VISIBLE));
+  updateSlider();
+}
+
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('filterSelect').value = f;
+  buildSlider();
+}
+
+function setFilterMobile(f) {
+  activeFilter = f;
+  // sync pills desktop aussi
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.classList.toggle('on', p.getAttribute('onclick').includes(`'${f}'`));
+  });
+  buildSlider();
+}
+
+function selectOppIdx(i) {
+  document.querySelectorAll('.opp-pill').forEach((p, j) => p.classList.toggle('active', j === i));
+}
+
+window.addEventListener('load', buildSlider);
+window.addEventListener('resize', buildSlider);
+</script>
+</body>
+</html>
