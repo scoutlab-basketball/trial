@@ -11,11 +11,11 @@
 :root{
   --bg:#0A0A0A;--s:#111111;--card:#1E1E1E;--up:#2A2A2A;
   --b1:rgba(255,255,255,0.09);--b2:rgba(255,255,255,0.16);
-  --o:#F0A020;--o2:#F5C800;
-  --og:linear-gradient(135deg,#D46800,#F5C400);
-  --od:rgba(240,160,32,.16);
+  --o:#ef3041;--o2:#ef3041;
+  --og:linear-gradient(135deg,#ef3041,#ff4d5e);
+  --od:rgba(239,48,65,.16);
   --t1:#FFFFFF;--t2:#AAAAAA;--t3:#777777;
-  --g:#3DC97A;--r:#F04F5C;--a:#F5A623;
+  --g:#3DC97A;--r:#F04F5C;--a:#ef3041;
 }
 
 html{font-size:14px}
@@ -23,14 +23,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ── SIDEBAR ── */
 nav{width:72px;min-height:100vh;background:var(--s);display:flex;flex-direction:column;align-items:center;padding:18px 0;position:fixed;top:0;left:0;bottom:0;z-index:99}
-.nav-logo{width:38px;height:38px;background:var(--og);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#000;box-shadow:0 4px 18px rgba(213,120,0,.45);margin-bottom:28px;flex-shrink:0}
+.nav-logo{width:38px;height:38px;background:var(--og);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#000;box-shadow:0 4px 18px rgba(239,48,65,.45);margin-bottom:28px;flex-shrink:0}
 .nav-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--t3);cursor:pointer;transition:all .15s;margin-bottom:4px;position:relative}
 .nav-ico svg{width:20px;height:20px}
 .nav-ico:hover{background:var(--up);color:var(--t2)}
 .nav-ico.on{background:var(--od);color:var(--o)}
 .nav-ico .dot{position:absolute;top:7px;right:7px;width:6px;height:6px;border-radius:50%;background:var(--o)}
 .nav-spacer{flex:1}
-.nav-user{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--o),#F5C400);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;cursor:pointer;margin-top:8px}
+.nav-user{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ef3041,#ff4d5e);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;cursor:pointer;margin-top:8px}
 
 /* ── MAIN ── */
 main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:column;gap:22px;min-width:0}
@@ -38,7 +38,7 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 /* ── HERO ── */
 .hero{background:linear-gradient(135deg,#0E0E0E 0%,#161616 100%);border-radius:20px;padding:28px 32px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;position:relative;overflow:hidden}
 .hero-left{display:flex;flex-direction:column;gap:20px}
-.hero::before{content:'';position:absolute;top:-60px;right:180px;width:260px;height:260px;background:radial-gradient(circle,rgba(240,160,32,.07) 0%,transparent 65%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:-60px;right:180px;width:260px;height:260px;background:radial-gradient(circle,rgba(239,48,65,.07) 0%,transparent 65%);pointer-events:none}
 .hero-name{font-size:42px;font-weight:900;color:var(--t1);letter-spacing:-2px;line-height:1}
 .swot{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center}
 .swot-col{display:flex;flex-direction:column;gap:5px}
@@ -117,13 +117,13 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 /* ── SEASON SLIDER ── */
 .slider-card{background:var(--card);border-radius:18px;padding:18px 20px 20px}
 .slider-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
-.slider-title{font-size:20px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#D46800,#F5C400);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
+.slider-title{font-size:20px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#ef3041,#ff4d5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
 
 /* Pills desktop */
 .filter-pills{display:flex;gap:6px}
 .filter-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;transition:all .15s;white-space:nowrap;border:1.5px solid var(--up);background:transparent;letter-spacing:.1px}
 .filter-pill:hover{color:var(--t1);border-color:var(--t3)}
-.filter-pill.on{background:var(--og);border-color:transparent;color:#000;box-shadow:0 2px 10px rgba(212,104,0,.3)}
+.filter-pill.on{background:var(--og);border-color:transparent;color:#000;box-shadow:0 2px 10px rgba(239,48,65,.3)}
 
 /* Select mobile (caché sur desktop) */
 .filter-select{display:none}
@@ -139,9 +139,9 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 .opp-pill{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 10px 14px;border-radius:13px;cursor:pointer;transition:background .15s;flex-shrink:0;position:relative;text-align:center}
 .opp-pill:hover{background:var(--up)}
 .opp-pill:hover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--og);border-radius:2px 2px 0 0}
-.opp-pill.active{background:rgba(240,160,32,.08)}
+.opp-pill.active{background:rgba(239,48,65,.08)}
 .opp-pill.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--og);border-radius:2px 2px 0 0}
-.opp-pill.active .opp-name{background:linear-gradient(135deg,#D46800,#F5C400);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.opp-pill.active .opp-name{background:linear-gradient(135deg,#ef3041,#ff4d5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .opp-logo{width:50px;height:50px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;padding:5px;flex-shrink:0}
 .opp-logo img{width:100%;height:100%;object-fit:contain}
 .opp-logo span{font-size:11px;font-weight:800;color:#555}
@@ -313,7 +313,7 @@ body{padding-top:52px}
   <!-- SEASON SLIDER -->
   <div class="slider-card">
     <div class="slider-header">
-      <div class="slider-title">Adversaires</div>
+      <div class="slider-title" style="background:none;-webkit-text-fill-color:#2596be;color:#2596be">Adversaires</div>
       <!-- Pills desktop -->
       <div class="filter-pills">
         <button class="filter-pill on" onclick="setFilter('all',this)">Tous</button>
@@ -343,7 +343,7 @@ body{padding-top:52px}
 
   <!-- PROCHAINS ADVERSAIRES -->
   <div>
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:12px">Prochains adversaires</div>
+    <div style="font-size:20px;font-weight:900;letter-spacing:-.4px;color:#2596be;margin-bottom:12px">Prochains adversaires</div>
     <div class="next-slider-wrap">
       <div class="next-slider" id="nextSlider">
 
@@ -518,19 +518,19 @@ body{padding-top:52px}
           <text x="210" y="84" text-anchor="middle" font-size="17" font-weight="800" fill="#F04F5C" font-family="system-ui">61%</text>
           <text x="210" y="101" text-anchor="middle" font-size="9.5" fill="rgba(240,79,92,0.7)" font-family="system-ui">142 tirs</text>
           <circle cx="122" cy="168" r="34" fill="rgba(245,166,35,0.22)" stroke="rgba(245,166,35,0.4)" stroke-width="1.5"/>
-          <text x="122" y="163" text-anchor="middle" font-size="15" font-weight="800" fill="#F5A623" font-family="system-ui">44%</text>
+          <text x="122" y="163" text-anchor="middle" font-size="15" font-weight="800" fill="#ef3041" font-family="system-ui">44%</text>
           <text x="122" y="177" text-anchor="middle" font-size="9.5" fill="rgba(245,166,35,0.7)" font-family="system-ui">58 tirs</text>
           <circle cx="298" cy="168" r="34" fill="rgba(61,201,122,0.18)" stroke="rgba(61,201,122,0.35)" stroke-width="1.5"/>
           <text x="298" y="163" text-anchor="middle" font-size="15" font-weight="800" fill="#3DC97A" font-family="system-ui">29%</text>
           <text x="298" y="177" text-anchor="middle" font-size="9.5" fill="rgba(61,201,122,0.7)" font-family="system-ui">38 tirs</text>
           <circle cx="45" cy="235" r="30" fill="rgba(245,166,35,0.20)" stroke="rgba(245,166,35,0.38)" stroke-width="1.5"/>
-          <text x="45" y="230" text-anchor="middle" font-size="14" font-weight="800" fill="#F5A623" font-family="system-ui">42%</text>
+          <text x="45" y="230" text-anchor="middle" font-size="14" font-weight="800" fill="#ef3041" font-family="system-ui">42%</text>
           <text x="45" y="244" text-anchor="middle" font-size="9" fill="rgba(245,166,35,0.7)" font-family="system-ui">88 tirs</text>
           <circle cx="375" cy="235" r="30" fill="rgba(245,166,35,0.18)" stroke="rgba(245,166,35,0.35)" stroke-width="1.5"/>
-          <text x="375" y="230" text-anchor="middle" font-size="14" font-weight="800" fill="#F5A623" font-family="system-ui">40%</text>
+          <text x="375" y="230" text-anchor="middle" font-size="14" font-weight="800" fill="#ef3041" font-family="system-ui">40%</text>
           <text x="375" y="244" text-anchor="middle" font-size="9" fill="rgba(245,166,35,0.7)" font-family="system-ui">72 tirs</text>
-          <circle cx="210" cy="252" r="36" fill="rgba(212,104,0,0.20)" stroke="rgba(245,200,0,0.4)" stroke-width="1.5"/>
-          <text x="210" y="247" text-anchor="middle" font-size="15" font-weight="800" fill="#F5C400" font-family="system-ui">38%</text>
+          <circle cx="210" cy="252" r="36" fill="rgba(239,48,65,0.20)" stroke="rgba(239,48,65,0.4)" stroke-width="1.5"/>
+          <text x="210" y="247" text-anchor="middle" font-size="15" font-weight="800" fill="#ef3041" font-family="system-ui">38%</text>
           <text x="210" y="261" text-anchor="middle" font-size="9.5" fill="rgba(245,200,0,0.7)" font-family="system-ui">210 tirs</text>
           <circle cx="28" cy="18" r="5" fill="rgba(240,79,92,0.5)"/>
           <text x="36" y="22" font-size="9.5" fill="rgba(255,255,255,0.35)" font-family="system-ui">Chaud</text>
@@ -622,10 +622,10 @@ new Chart(document.getElementById('barChart').getContext('2d'),{
   data:{
     labels:['Paris BK','Fenerbahçe','Boulogne','ALBA','Mets 92'],
     datasets:[
-      {label:'Q1',data:[22,18,25,21,19],backgroundColor:'#D46800',borderRadius:5,borderSkipped:false},
-      {label:'Q2',data:[20,24,19,23,22],backgroundColor:'#E08C00',borderRadius:5,borderSkipped:false},
-      {label:'Q3',data:[18,22,23,19,25],backgroundColor:'#EFB000',borderRadius:5,borderSkipped:false},
-      {label:'Q4',data:[24,7,21,32,13],backgroundColor:'#F5C800',borderRadius:5,borderSkipped:false},
+      {label:'Q1',data:[22,18,25,21,19],backgroundColor:'#ef3041',borderRadius:5,borderSkipped:false},
+      {label:'Q2',data:[20,24,19,23,22],backgroundColor:'#ef3041',borderRadius:5,borderSkipped:false},
+      {label:'Q3',data:[18,22,23,19,25],backgroundColor:'#ef3041',borderRadius:5,borderSkipped:false},
+      {label:'Q4',data:[24,7,21,32,13],backgroundColor:'#ef3041',borderRadius:5,borderSkipped:false},
     ]
   },
   options:{
@@ -640,7 +640,7 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
   data:{
     labels:['Attaque','Rebond','Passes','3 pts','Défense','Vitesse'],
     datasets:[
-      {label:'AS Monaco',data:[88,72,80,75,68,85],backgroundColor:'rgba(212,104,0,.13)',borderColor:'#F0A020',borderWidth:2,pointBackgroundColor:'#F5C400',pointRadius:4,pointBorderWidth:0},
+      {label:'AS Monaco',data:[88,72,80,75,68,85],backgroundColor:'rgba(239,48,65,.13)',borderColor:'#ef3041',borderWidth:2,pointBackgroundColor:'#ef3041',pointRadius:4,pointBorderWidth:0},
       {label:'LDLC ASVEL',data:[82,80,75,68,79,72],backgroundColor:'rgba(98,98,98,.13)',borderColor:'#777',borderWidth:2,pointBackgroundColor:'#777',pointRadius:4,pointBorderWidth:0}
     ]
   },
