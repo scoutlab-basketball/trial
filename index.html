@@ -58,9 +58,9 @@ main{margin-left:72px;flex:1;padding:28px 32px;display:flex;flex-direction:colum
 
 /* ── CARD ── */
 .card{background:var(--card);border-radius:18px;padding:24px;position:relative;overflow:hidden}
-.card-title{font-size:24px;font-weight:800;color:var(--t1);margin-bottom:4px;display:flex;align-items:center;gap:10px}
-.card-title svg{width:22px;height:22px;flex-shrink:0;opacity:.9}
-.card-sub{font-size:15px;color:var(--t3);margin-bottom:18px}
+.card-title{font-size:20px;font-weight:800;color:#ef3041;margin-bottom:10px;margin-top:0;display:flex;align-items:center;gap:10px}
+.card-title svg{width:22px;height:22px;flex-shrink:0;color:#ef3041}
+.card-sub{font-size:13px;color:var(--t3);margin-bottom:14px;margin-top:-6px}
 
 /* ── FORM STRIP ── */
 .form-strip{display:flex;gap:8px;align-items:center;margin-bottom:18px}
@@ -452,14 +452,14 @@ body{padding-top:52px}
 
   <!-- MAIN GRID -->
   <div class="grid-2">
+    <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#ef3041" stroke-width="2"><rect x="2" y="12" width="4" height="10" rx="1"/><rect x="9" y="7" width="4" height="15" rx="1"/><rect x="16" y="3" width="4" height="19" rx="1"/></svg>Scoring par quart-temps</div>
+    <div class="card-sub">5 derniers matchs — distribution offensive</div>
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><rect x="2" y="12" width="4" height="10" rx="1"/><rect x="9" y="7" width="4" height="15" rx="1"/><rect x="16" y="3" width="4" height="19" rx="1"/></svg>Scoring par quart-temps</div>
-      <div class="card-sub">5 derniers matchs — distribution offensive</div>
       <div class="chart-wrap"><canvas id="barChart"></canvas></div>
     </div>
+    <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#ef3041" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="15" r="1" fill="#ef3041"/><circle cx="12" cy="15" r="1" fill="#ef3041"/><circle cx="16" cy="15" r="1" fill="#ef3041"/></svg>Derniers matchs</div>
+    <div class="card-sub">Résultats récents</div>
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="15" r="1" fill="white"/><circle cx="12" cy="15" r="1" fill="white"/><circle cx="16" cy="15" r="1" fill="white"/></svg>Derniers matchs</div>
-      <div class="card-sub">Résultats récents</div>
       <div class="form-strip">
         <div class="form-badge fb-v">V</div>
         <div class="form-game">
@@ -500,9 +500,9 @@ body{padding-top:52px}
 
   <!-- COURT + RADAR -->
   <div class="grid-2">
+    <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#ef3041" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>Carte de tirs — demi-terrain</div>
+    <div class="card-sub">Zones chaudes &amp; froides · 5 derniers matchs</div>
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>Carte de tirs — demi-terrain</div>
-      <div class="card-sub">Zones chaudes &amp; froides · 5 derniers matchs</div>
       <div class="court-wrap">
         <svg viewBox="0 0 420 310" width="100%" style="max-height:270px">
           <rect x="10" y="10" width="400" height="285" rx="6" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
@@ -541,9 +541,9 @@ body{padding-top:52px}
         </svg>
       </div>
     </div>
+    <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#ef3041" stroke-width="2"><polygon points="12,2 19,8 17,17 7,17 5,8"/><line x1="12" y1="2" x2="17" y2="17"/><line x1="12" y1="2" x2="7" y2="17"/><line x1="12" y1="2" x2="19" y2="8"/><line x1="12" y1="2" x2="5" y2="8"/><line x1="5" y1="8" x2="19" y2="8"/><line x1="7" y1="17" x2="17" y2="17"/></svg>Profil de jeu</div>
+    <div class="card-sub">Monaco vs LDLC ASVEL</div>
     <div class="card">
-      <div class="card-title"><svg fill="none" viewBox="0 0 24 24" stroke="#0f0f10" stroke-width="2"><polygon points="12,2 19,8 17,17 7,17 5,8"/><line x1="12" y1="2" x2="17" y2="17"/><line x1="12" y1="2" x2="7" y2="17"/><line x1="12" y1="2" x2="19" y2="8"/><line x1="12" y1="2" x2="5" y2="8"/><line x1="5" y1="8" x2="19" y2="8"/><line x1="7" y1="17" x2="17" y2="17"/></svg>Profil de jeu</div>
-      <div class="card-sub">Monaco vs LDLC ASVEL</div>
       <div class="chart-wrap" style="height:240px"><canvas id="radarChart"></canvas></div>
       <div style="display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.07)">
         <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--t2)"><div style="width:10px;height:10px;border-radius:50%;background:var(--o)"></div>AS Monaco</div>
